@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>With Bad DEVELOPMENT</title>
+
+<!-- Site logo / browser tab icon -->
+<link rel="icon" type="image/jpeg" href="channels4_profile (1).jpg">
+<link rel="shortcut icon" type="image/jpeg" href="channels4_profile (1).jpg">
+<link rel="apple-touch-icon" href="channels4_profile (1).jpg">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -99,6 +105,7 @@
     gap:20px;
   }
 
+  /* Logo + brand */
   .brand{
     font-family:var(--font-display);
     font-weight:700;
@@ -106,18 +113,34 @@
     letter-spacing:0.02em;
     text-transform:uppercase;
     display:flex;
-    align-items:baseline;
-    gap:8px;
+    align-items:center;
+    gap:12px;
     white-space:nowrap;
   }
 
+  .brand img{
+    width:44px;
+    height:44px;
+    object-fit:cover;
+    border:1px solid var(--wire);
+    background:var(--panel);
+    flex-shrink:0;
+  }
+
+  .brand > span{
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+  }
+
   .brand .old{
-    font-size:11px;
+    font-size:9px;
     font-family:var(--font-mono);
     font-weight:400;
     color:var(--muted);
     text-decoration:line-through;
     text-decoration-color:var(--crimson);
+    margin-top:5px;
   }
 
   .navlinks{
@@ -750,6 +773,15 @@
       align-items:flex-start;
     }
 
+    .brand{
+      font-size:18px;
+    }
+
+    .brand img{
+      width:40px;
+      height:40px;
+    }
+
     .navlinks{
       width:100%;
       gap:14px;
@@ -795,9 +827,17 @@
 <header>
   <div class="navbar">
 
+    <!-- LOGO -->
     <div class="brand">
-      WITH BAD DEVELOPMENT
-      <span class="old">was: Studios</span>
+      <img
+        src="channels4_profile (1).jpg"
+        alt="With Bad Development logo"
+      >
+
+      <span>
+        WITH BAD DEVELOPMENT
+        <span class="old">was: Studios</span>
+      </span>
     </div>
 
     <div class="navlinks">
@@ -806,7 +846,6 @@
       <a href="#games">Games</a>
       <a href="#careers">Careers</a>
 
-      <!-- Applications link for site owner/team -->
       <a
         class="applications-link"
         href="https://sites.google.com/view/with-bad-studios/applications"
@@ -1249,7 +1288,7 @@
   </p>
 
 
-  <!-- NEW APPLICATIONS PANEL -->
+  <!-- APPLICATIONS PANEL -->
 
   <div class="applications-panel">
 

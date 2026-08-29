@@ -2,1329 +2,202 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>With Bad DEVELOPMENT</title>
 <link rel="icon" type="image/jpeg" href="channels4_profile (1).jpg">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-:root{
---void:#080d09;
---panel:#0d1710;
---panel2:#122016;
---paper:#d9f5df;
---muted:#719078;
---wire:#1d3824;
---green:#39ff88;
---green2:#18a854;
---red:#ff5555;
---display:'Oswald',sans-serif;
---mono:'JetBrains Mono',monospace
-}
-
+:root{--void:#090d0a;--panel:#101711;--panel2:#172019;--paper:#e6eee6;--muted:#7d8b7d;--wire:#26352a;--green:#42ff72;--green2:#18c94b;--red:#d4473a;--display:'Oswald',sans-serif;--mono:'JetBrains Mono',monospace}
 *{margin:0;padding:0;box-sizing:border-box}
-
 html{scroll-behavior:smooth}
-
-body{
-background:var(--void);
-color:var(--paper);
-font-family:var(--mono);
-line-height:1.6;
-overflow-x:hidden
-}
-
-body:before{
-content:"";
-position:fixed;
-inset:0;
-z-index:-2;
-background-image:linear-gradient(rgba(57,255,136,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(57,255,136,.025) 1px,transparent 1px);
-background-size:42px 42px
-}
-
-body:after{
-content:"";
-position:fixed;
-inset:0;
-z-index:999;
-pointer-events:none;
-background:repeating-linear-gradient(0deg,rgba(0,0,0,.07) 0,rgba(0,0,0,.07) 1px,transparent 1px,transparent 4px);
-opacity:.35
-}
-
-::selection{
-background:var(--green);
-color:var(--void)
-}
-
-a{
-color:inherit;
-text-decoration:none
-}
-
-header{
-position:sticky;
-top:0;
-z-index:200;
-background:rgba(8,13,9,.9);
-backdrop-filter:blur(8px);
-border-bottom:1px solid var(--wire)
-}
-
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 6vw;
-gap:20px
-}
-
-.brand{
-font-family:var(--display);
-font-weight:700;
-font-size:20px;
-letter-spacing:.02em;
-text-transform:uppercase;
-display:flex;
-align-items:center;
-gap:12px;
-white-space:nowrap
-}
-
-.brand img{
-width:44px;
-height:44px;
-object-fit:cover;
-border:1px solid var(--wire);
-background:var(--panel);
-transition:.3s;
-box-shadow:0 0 15px rgba(57,255,136,.08)
-}
-
-.brand:hover img{
-border-color:var(--green);
-box-shadow:0 0 20px rgba(57,255,136,.25);
-transform:rotate(-2deg) scale(1.03)
-}
-
-.brand>span{
-display:flex;
-flex-direction:column;
-line-height:1.05
-}
-
-.brand .old{
-font-size:9px;
-font-family:var(--mono);
-font-weight:400;
-color:var(--muted);
-text-decoration:line-through;
-text-decoration-color:var(--red);
-margin-top:5px
-}
-
-.navlinks{
-display:flex;
-gap:20px;
-font-size:11px;
-letter-spacing:.12em;
-text-transform:uppercase;
-align-items:center
-}
-
-.navlinks a{
-position:relative;
-padding-bottom:4px;
-color:var(--muted);
-transition:.25s
-}
-
-.navlinks a:hover{
-color:var(--green);
-text-shadow:0 0 10px rgba(57,255,136,.5)
-}
-
-.navlinks a:after{
-content:"";
-position:absolute;
-left:0;
-bottom:0;
-width:0;
-height:1px;
-background:var(--green);
-transition:.3s
-}
-
-.navlinks a:hover:after{
-width:100%
-}
-
-.navlinks .applications-link{
-color:var(--green);
-border:1px solid var(--green);
-padding:6px 10px
-}
-
-.navlinks .applications-link:after{
-display:none
-}
-
-.navlinks .applications-link:hover{
-background:var(--green);
-color:var(--void);
-text-shadow:none;
-box-shadow:0 0 18px rgba(57,255,136,.2)
-}
-
-.hero{
-padding:105px 6vw 85px;
-position:relative;
-overflow:hidden;
-min-height:650px;
-display:flex;
-flex-direction:column;
-justify-content:center
-}
-
-.hero:before{
-content:"";
-position:absolute;
-width:500px;
-height:500px;
-right:-250px;
-top:-150px;
-border:1px solid rgba(57,255,136,.08);
-border-radius:50%;
-animation:spin 25s linear infinite
-}
-
-.hero:after{
-content:"";
-position:absolute;
-width:350px;
-height:350px;
-right:-170px;
-top:-75px;
-border:1px solid rgba(57,255,136,.06);
-border-radius:50%;
-animation:spin 15s linear infinite reverse
-}
-
-.badge{
-display:inline-flex;
-align-items:center;
-gap:8px;
-width:max-content;
-font-size:10px;
-letter-spacing:.18em;
-text-transform:uppercase;
-color:var(--green);
-border:1px solid var(--green);
-padding:6px 12px;
-margin-bottom:25px;
-animation:fadeUp .8s ease both;
-box-shadow:0 0 20px rgba(57,255,136,.06)
-}
-
-.badge .pulse{
-width:6px;
-height:6px;
-border-radius:50%;
-background:var(--green);
-box-shadow:0 0 10px var(--green);
-animation:pulse 1.5s ease-in-out infinite
-}
-
-.hero h1{
-font-family:var(--display);
-text-transform:uppercase;
-font-size:clamp(45px,8vw,92px);
-line-height:.96;
-font-weight:700;
-letter-spacing:.01em;
-animation:fadeUp .8s .1s ease both
-}
-
-.hero h1 .flicker{
-color:var(--green);
-text-shadow:0 0 25px rgba(57,255,136,.25);
-animation:flicker 5s infinite,greenGlow 3s ease-in-out infinite
-}
-
-.hero h3{
-margin-top:10px;
-font-size:11px;
-color:var(--muted);
-font-weight:400;
-letter-spacing:.1em;
-text-transform:uppercase;
-animation:fadeUp .8s .15s ease both
-}
-
-.hero p.lead{
-max-width:650px;
-margin-top:27px;
-color:#9eb5a4;
-font-size:14px;
-animation:fadeUp .8s .2s ease both
-}
-
-.hero .ctas{
-margin-top:35px;
-display:flex;
-gap:14px;
-flex-wrap:wrap;
-animation:fadeUp .8s .3s ease both
-}
-
-.btn{
-display:inline-block;
-padding:12px 24px;
-font-size:11px;
-letter-spacing:.15em;
-text-transform:uppercase;
-border:1px solid var(--green);
-color:var(--green);
-position:relative;
-overflow:hidden;
-transition:.3s;
-z-index:1
-}
-
-.btn:before{
-content:"";
-position:absolute;
-inset:0;
-background:var(--green);
-transform:translateY(101%);
-transition:.3s;
-z-index:-1
-}
-
-.btn:hover{
-color:var(--void);
-box-shadow:0 0 25px rgba(57,255,136,.18)
-}
-
-.btn:hover:before{
-transform:translateY(0)
-}
-
-.btn.ghost{
-border-color:var(--wire);
-color:var(--muted)
-}
-
-.btn.ghost:before{
-background:var(--wire)
-}
-
-.btn.ghost:hover{
-color:var(--paper)
-}
-
-.section{
-padding:85px 6vw;
-border-top:1px solid var(--wire)
-}
-
-.label{
-font-size:10px;
-letter-spacing:.25em;
-text-transform:uppercase;
-color:var(--green);
-margin-bottom:13px
-}
-
-.heading{
-font-family:var(--display);
-font-weight:700;
-text-transform:uppercase;
-font-size:clamp(30px,4.5vw,45px);
-margin-bottom:30px
-}
-
-.prose{
-max-width:680px;
-color:#a5b7aa;
-font-size:13.5px
-}
-
-.log-line{
-display:grid;
-grid-template-columns:80px 125px 1fr;
-gap:20px;
-padding:25px 0;
-border-bottom:1px solid var(--wire);
-opacity:0;
-transform:translateY(25px);
-transition:.7s
-}
-
-.log-line.visible{
-opacity:1;
-transform:translateY(0)
-}
-
-.log-line:last-child{
-border-bottom:none
-}
-
-.log-ver{
-font-family:var(--display);
-font-weight:600;
-color:var(--green);
-font-size:18px
-}
-
-.log-tag{
-align-self:start;
-font-size:9px;
-letter-spacing:.1em;
-text-transform:uppercase;
-padding:4px 8px;
-border:1px solid var(--wire);
-color:var(--muted);
-width:max-content
-}
-
-.log-tag.current{
-border-color:var(--green);
-color:var(--green);
-box-shadow:0 0 12px rgba(57,255,136,.08)
-}
-
-.log-body h3{
-font-family:var(--display);
-text-transform:uppercase;
-font-size:19px;
-margin-bottom:8px
-}
-
-.log-body p{
-font-size:12.5px;
-color:#819587
-}
-
-.terminal{
-background:#050805;
-border:1px solid var(--wire);
-margin-top:40px;
-font-size:12px;
-box-shadow:0 0 30px rgba(0,0,0,.25);
-transition:.3s
-}
-
-.terminal:hover{
-border-color:rgba(57,255,136,.4);
-box-shadow:0 0 35px rgba(57,255,136,.06)
-}
-
-.terminal__bar{
-display:flex;
-gap:6px;
-align-items:center;
-padding:10px 14px;
-border-bottom:1px solid var(--wire);
-color:var(--muted);
-font-size:10px;
-letter-spacing:.1em
-}
-
-.terminal__dot{
-width:8px;
-height:8px;
-border-radius:50%;
-background:var(--wire)
-}
-
-.terminal__dot.active{
-background:var(--green);
-box-shadow:0 0 8px var(--green)
-}
-
-.terminal__body{
-padding:20px;
-min-height:150px;
-color:#74ff9e
-}
-
-.terminal__body .line{
-opacity:0;
-margin-bottom:6px;
-animation:type-in .4s ease forwards
-}
-
-.cursor{
-display:inline-block;
-width:7px;
-height:14px;
-background:var(--green);
-animation:blink 1s steps(1) infinite;
-vertical-align:middle
-}
-
-.roster{
-display:grid;
-gap:1px;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-background:var(--wire);
-border:1px solid var(--wire);
-margin-top:25px
-}
-
-.role-card{
-background:var(--panel);
-padding:25px 22px;
-position:relative;
-transition:.35s;
-overflow:hidden
-}
-
-.role-card:before{
-content:"";
-position:absolute;
-left:0;
-top:0;
-width:2px;
-height:100%;
-background:var(--green);
-transform:scaleY(0);
-transform-origin:bottom;
-transition:.35s
-}
-
-.role-card:hover{
-background:var(--panel2);
-transform:translateY(-3px)
-}
-
-.role-card:hover:before{
-transform:scaleY(1)
-}
-
-.role-card__icon{
-font-size:21px;
-transition:.3s
-}
-
-.role-card:hover .role-card__icon{
-transform:scale(1.15) rotate(-5deg)
-}
-
-.role-card__title{
-font-family:var(--display);
-text-transform:uppercase;
-font-size:16px;
-margin:10px 0 11px;
-letter-spacing:.04em;
-color:var(--green)
-}
-
-.role-card__desc{
-font-size:11.5px;
-color:var(--muted);
-margin-bottom:14px
-}
-
-.name-chip{
-display:inline-block;
-font-size:11px;
-padding:5px 9px;
-margin:0 5px 5px 0;
-border:1px solid var(--wire);
-color:var(--paper);
-transition:.25s
-}
-
-.name-chip:hover{
-transform:translateY(-3px);
-border-color:var(--green);
-color:var(--green);
-box-shadow:0 0 10px rgba(57,255,136,.08)
-}
-
-.game-grid{
-display:grid;
-gap:18px;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-margin-top:25px
-}
-
-.game-card{
-display:block;
-background:var(--panel);
-border:1px solid var(--wire);
-padding:24px;
-position:relative;
-overflow:hidden;
-transition:.35s
-}
-
-.game-card:before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:2px;
-background:linear-gradient(90deg,var(--green),#9cffbd);
-transform:scaleX(0);
-transform-origin:left;
-transition:.4s
-}
-
-.game-card:hover{
-border-color:var(--green);
-transform:translateY(-6px);
-box-shadow:0 12px 35px rgba(0,0,0,.25)
-}
-
-.game-card:hover:before{
-transform:scaleX(1)
-}
-
-.game-card__eyebrow{
-font-size:9px;
-letter-spacing:.15em;
-text-transform:uppercase;
-color:var(--muted)
-}
-
-.game-card__title{
-font-family:var(--display);
-text-transform:uppercase;
-font-size:22px;
-margin:9px 0
-}
-
-.game-card__desc{
-font-size:12px;
-color:#819587
-}
-
-.game-card__link{
-margin-top:16px;
-font-size:10px;
-letter-spacing:.1em;
-text-transform:uppercase;
-color:var(--green);
-display:inline-flex;
-gap:7px
-}
-
-.arrow{
-transition:.25s
-}
-
-.game-card:hover .arrow{
-transform:translateX(6px)
-}
-
-.career-grid{
-display:grid;
-gap:18px;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-margin-top:25px
-}
-
-.career-card{
-background:var(--panel);
-border-left:2px solid var(--wire);
-padding:24px;
-transition:.35s
-}
-
-.career-card:hover{
-border-color:var(--green);
-background:var(--panel2);
-transform:translateY(-4px)
-}
-
-.career-card__head{
-display:flex;
-justify-content:space-between;
-align-items:baseline
-}
-
-.career-card__title{
-font-family:var(--display);
-text-transform:uppercase;
-font-size:19px
-}
-
-.career-card__age{
-font-size:9px;
-color:var(--muted);
-letter-spacing:.08em
-}
-
-.career-card__desc{
-font-size:12px;
-color:#819587;
-margin:10px 0 12px
-}
-
-.career-card ul{
-padding-left:16px;
-font-size:11.5px;
-color:#6f8474
-}
-
-.career-card li{
-margin-bottom:5px
-}
-
-.applications-panel{
-margin-top:30px;
-padding:28px;
-background:var(--panel);
-border:1px solid var(--wire);
-border-left:3px solid var(--green);
-position:relative;
-overflow:hidden
-}
-
-.applications-panel:after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:100%;
-height:1px;
-background:var(--green);
-animation:scan 4s linear infinite
-}
-
-.applications-panel h3{
-font-family:var(--display);
-text-transform:uppercase;
-font-size:22px;
-margin-bottom:8px;
-color:var(--green)
-}
-
-.applications-panel p{
-color:#819587;
-font-size:12px;
-max-width:650px;
-margin-bottom:20px
-}
-
-.branches{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-margin-top:30px
-}
-
-.branch-pill{
-font-size:10px;
-letter-spacing:.08em;
-text-transform:uppercase;
-border:1px solid var(--wire);
-padding:8px 14px;
-color:var(--muted);
-transition:.25s
-}
-
-.branch-pill:hover{
-border-color:var(--green);
-color:var(--green);
-transform:translateY(-3px);
-box-shadow:0 0 12px rgba(57,255,136,.07)
-}
-
-.cta{
-text-align:center;
-padding:105px 6vw;
-border-top:1px solid var(--wire)
-}
-
-.cta h2{
-font-family:var(--display);
-text-transform:uppercase;
-font-size:clamp(30px,6vw,56px);
-margin-bottom:18px
-}
-
-.cta h2 span{
-color:var(--green);
-text-shadow:0 0 25px rgba(57,255,136,.25)
-}
-
-.cta p{
-color:var(--muted);
-max-width:480px;
-margin:0 auto 28px;
-font-size:13px
-}
-
-footer{
-padding:32px 6vw;
-border-top:1px solid var(--wire);
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
-gap:14px;
-font-size:10px;
-color:var(--muted);
-letter-spacing:.05em
-}
-
-footer span{
-color:var(--green)
-}
-
-#loader{
-position:fixed;
-inset:0;
-background:#050805;
-z-index:10000;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:opacity .7s,visibility .7s
-}
-
-#loader.hidden{
-opacity:0;
-visibility:hidden
-}
-
-.loader-box{
-width:min(520px,85vw)
-}
-
-.loader-title{
-font-family:var(--display);
-font-size:32px;
-color:var(--green);
-text-transform:uppercase;
-margin-bottom:15px
-}
-
-.loader-text{
-font-size:11px;
-color:#74ff9e;
-min-height:45px
-}
-
-.loader-bar{
-height:2px;
-background:var(--wire);
-margin-top:20px;
-overflow:hidden
-}
-
-.loader-progress{
-height:100%;
-width:0;
-background:var(--green);
-box-shadow:0 0 12px var(--green);
-animation:loading 1.8s ease forwards
-}
-
-@keyframes loading{
-0%{width:0}
-30%{width:35%}
-65%{width:68%}
-100%{width:100%}
-}
-
-@keyframes pulse{
-0%,100%{opacity:1;transform:scale(1)}
-50%{opacity:.3;transform:scale(1.5)}
-}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(25px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-@keyframes flicker{
-0%,19%,21%,23%,80%,100%{opacity:1}
-20%,22%,24%{opacity:.35}
-}
-
-@keyframes greenGlow{
-0%,100%{text-shadow:0 0 15px rgba(57,255,136,.15)}
-50%{text-shadow:0 0 35px rgba(57,255,136,.5)}
-}
-
-@keyframes blink{
-50%{opacity:0}
-}
-
-@keyframes type-in{
-to{opacity:1}
-}
-
-@keyframes spin{
-to{transform:rotate(360deg)}
-}
-
-@keyframes scan{
-0%{left:-100%}
-50%,100%{left:100%}
-}
-
-@media(max-width:760px){
-.navbar{
-flex-direction:column;
-align-items:flex-start
-}
-
-.navlinks{
-width:100%;
-gap:13px;
-flex-wrap:wrap;
-font-size:9px
-}
-
-.hero{
-padding-top:70px;
-min-height:580px
-}
-
-.log-line{
-grid-template-columns:65px 1fr;
-gap:12px
-}
-
-.log-tag{
-grid-column:2;
-grid-row:1
-}
-
-.log-body{
-grid-column:1/-1
-}
-
-.role-card[style]{
-grid-column:span 1!important
-}
-
-.applications-panel{
-padding:22px
-}
-
-footer{
-flex-direction:column
-}
-}
+body{background:var(--void);color:var(--paper);font-family:var(--mono);line-height:1.6;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(66,255,114,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(66,255,114,.025) 1px,transparent 1px);background-size:42px 42px}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 0,rgba(66,255,114,.08),transparent 35%)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--green);color:#071008}
+header{position:sticky;top:0;z-index:100;background:rgba(9,13,10,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--wire)}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:16px 6vw;gap:20px}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:center;gap:12px;white-space:nowrap}
+.brand img{width:44px;height:44px;object-fit:cover;border:1px solid var(--wire);background:var(--panel);transition:.3s}
+.brand img:hover{border-color:var(--green);box-shadow:0 0 20px rgba(66,255,114,.25);transform:rotate(-2deg) scale(1.04)}
+.brand span{line-height:1.05}
+.navlinks{display:flex;gap:24px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;align-items:center}
+.navlinks a{position:relative;padding-bottom:4px}
+.navlinks a:after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--green);transition:.3s}
+.navlinks a:hover:after{width:100%}
+.navlinks .help{color:var(--green);border:1px solid var(--green);padding:6px 10px}
+.navlinks .help:after{display:none}
+.navlinks .help:hover{background:var(--green);color:var(--void);box-shadow:0 0 18px rgba(66,255,114,.3)}
+.hero{padding:100px 6vw 80px;position:relative}
+.hero:before{content:"";position:absolute;width:300px;height:300px;right:-100px;top:40px;border:1px solid rgba(66,255,114,.08);border-radius:50%;animation:spin 18s linear infinite}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);border:1px solid var(--green);padding:5px 12px;margin-bottom:26px;animation:fadeUp .7s ease both}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite;box-shadow:0 0 10px var(--green)}
+.hero h1{font-family:var(--display);text-transform:uppercase;font-size:clamp(42px,8vw,92px);line-height:.98;font-weight:700;letter-spacing:.01em;animation:fadeUp .8s .1s ease both}
+.hero h1 .flicker{color:var(--green);animation:flicker 4s infinite;text-shadow:0 0 20px rgba(66,255,114,.2)}
+.hero h3{margin-top:12px;color:var(--muted);font-size:12px;font-weight:400;animation:fadeUp .8s .2s ease both}
+.lead{max-width:600px;margin-top:26px;color:#b8c4b8;font-size:15px;animation:fadeUp .8s .3s ease both}
+.ctas{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
+.btn{display:inline-block;padding:13px 26px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;border:1px solid var(--green);color:var(--green);position:relative;overflow:hidden;transition:.3s;z-index:1}
+.btn:before{content:"";position:absolute;inset:0;background:var(--green);transform:translateY(101%);transition:.3s;z-index:-1}
+.btn:hover{color:var(--void);box-shadow:0 0 25px rgba(66,255,114,.2)}
+.btn:hover:before{transform:translateY(0)}
+.btn.ghost{border-color:var(--wire);color:var(--muted)}
+.btn.ghost:before{background:var(--wire)}
+.section{padding:80px 6vw;border-top:1px solid var(--wire)}
+.label{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.heading{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(28px,4.5vw,44px);margin-bottom:36px}
+.prose{max-width:680px;color:#c1ccc1;font-size:14.5px}
+.log-line{display:grid;grid-template-columns:90px 130px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--wire);opacity:0;transform:translateY(25px);transition:.7s}
+.log-line.visible{opacity:1;transform:translateY(0)}
+.log-ver{font-family:var(--display);font-weight:600;color:var(--green);font-size:18px}
+.log-tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--wire);color:var(--muted);width:max-content;height:max-content}
+.log-tag.current{border-color:var(--green);color:var(--green);box-shadow:0 0 12px rgba(66,255,114,.1)}
+.log-body h3{font-family:var(--display);text-transform:uppercase;font-size:19px;margin-bottom:8px}
+.log-body p{font-size:13.5px;color:#a6b1a6}
+.terminal{background:#080d09;border:1px solid var(--wire);margin-top:40px;box-shadow:0 0 30px rgba(66,255,114,.04);transition:.3s}
+.terminal:hover{border-color:rgba(66,255,114,.35);box-shadow:0 0 35px rgba(66,255,114,.08)}
+.terminal__bar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--wire);color:var(--muted);font-size:11px;letter-spacing:.1em}
+.terminal__dot{width:8px;height:8px;border-radius:50%;background:var(--wire)}
+.terminal__dot:first-child{background:#35ff68}
+.terminal__body{padding:20px;min-height:150px;color:#8dff9f}
+.terminal__body .line{opacity:0;animation:type-in .4s ease forwards}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--green);animation:blink 1s steps(1) infinite;vertical-align:middle}
+.roster,.game-grid,.career-grid{display:grid;gap:1px;background:var(--wire);border:1px solid var(--wire);margin-top:10px}
+.roster{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.role-card,.game-card,.career-card{background:var(--panel);transition:.3s}
+.role-card{padding:26px 22px}
+.role-card:hover{background:var(--panel2);transform:translateY(-3px)}
+.role-card__icon{font-size:22px}
+.role-card__title{font-family:var(--display);text-transform:uppercase;font-size:16px;margin:10px 0 12px;color:var(--green)}
+.role-card__desc{font-size:12px;color:var(--muted);margin-bottom:14px}
+.name-chip{display:inline-block;font-size:12px;padding:5px 10px;margin:0 6px 6px 0;border:1px solid var(--wire);transition:.25s}
+.name-chip:hover{transform:translateY(-3px);border-color:var(--green);color:var(--green);box-shadow:0 0 10px rgba(66,255,114,.08)}
+.game-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;background:none;border:0}
+.game-card{border:1px solid var(--wire);padding:24px;position:relative;overflow:hidden}
+.game-card:hover{border-color:var(--green);transform:translateY(-6px);box-shadow:0 15px 35px rgba(0,0,0,.25)}
+.game-card:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:.4s}
+.game-card:hover:before{transform:scaleX(1)}
+.game-card__eyebrow{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.game-card__title{font-family:var(--display);text-transform:uppercase;font-size:22px;margin:10px 0}
+.game-card__desc{font-size:12.5px;color:#a8b2a8}
+.game-card__link{margin-top:16px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);display:inline-flex;gap:6px}
+.arrow{transition:.25s}
+.game-card:hover .arrow{transform:translateX(6px)}
+.career-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;background:none;border:0}
+.career-card{border-left:3px solid var(--wire);padding:24px}
+.career-card:hover{border-color:var(--green);background:var(--panel2);transform:translateX(3px)}
+.career-card__head{display:flex;justify-content:space-between;align-items:baseline}
+.career-card__title{font-family:var(--display);text-transform:uppercase;font-size:19px}
+.career-card__age{font-size:10px;color:var(--muted)}
+.career-card__desc{font-size:12.5px;color:#a8b2a8;margin:10px 0 12px}
+.career-card ul{padding-left:16px;font-size:12px;color:#879387}
+.career-card li{margin-bottom:5px}
+.applications-panel{margin-top:30px;padding:28px;background:var(--panel);border:1px solid var(--wire);border-left:3px solid var(--green)}
+.applications-panel h3{font-family:var(--display);text-transform:uppercase;font-size:22px;margin-bottom:8px;color:var(--green)}
+.applications-panel p{color:#a8b2a8;font-size:13px;max-width:650px;margin-bottom:20px}
+.branches{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.branch-pill{font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--wire);padding:8px 16px;transition:.25s}
+.branch-pill:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+.cta{text-align:center;padding:100px 6vw;border-top:1px solid var(--wire)}
+.cta h2{font-family:var(--display);text-transform:uppercase;font-size:clamp(30px,6vw,56px);margin-bottom:20px}
+.cta p{color:var(--muted);max-width:480px;margin:0 auto 30px;font-size:14px}
+footer{padding:34px 6vw;border-top:1px solid var(--wire);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11px;color:var(--muted)}
+@keyframes pulse{50%{opacity:.25;transform:scale(1.6)}}
+@keyframes flicker{0%,19%,21%,80%,100%{opacity:1}20%,22%,24%{opacity:.35}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes type-in{to{opacity:1}}
+@keyframes blink{50%{opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){.navbar{flex-direction:column;align-items:flex-start}.navlinks{width:100%;gap:14px;flex-wrap:wrap;font-size:10px}.log-line{grid-template-columns:65px 1fr}.log-tag{grid-column:2}.log-body{grid-column:1/-1}.role-card[style]{grid-column:span 1!important}footer{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-
-<div id="loader">
-<div class="loader-box">
-<div class="loader-title">WITH BAD DEVELOPMENT</div>
-<div class="loader-text" id="loaderText">&gt; starting system...</div>
-<div class="loader-bar"><div class="loader-progress"></div></div>
-</div>
-</div>
-
 <header>
 <div class="navbar">
-<div class="brand">
-<img src="channels4_profile (1).jpg" alt="With Bad Development logo">
-<span>WITH BAD DEVELOPMENT</span>
-</div>
+<div class="brand"><img src="channels4_profile (1).jpg" alt="With Bad Development logo"><span>WITH BAD DEVELOPMENT</span></div>
 <div class="navlinks">
 <a href="#story">Story</a>
 <a href="#team">Team</a>
 <a href="#games">Games</a>
 <a href="#careers">Careers</a>
-<a href="/help/">Help</a>
-<a class="applications-link" href="https://sites.google.com/view/with-bad-studios/applications" target="_blank" rel="noopener">Applications</a>
+<a class="help" href="./help/">Help</a>
 </div>
 </div>
 </header>
-
 <section class="hero">
-<div class="badge"><span class="pulse"></span> BUILD v4.0.0 — FULL RECODE</div>
+<div class="badge"><span class="pulse"></span>BUILD v4.0.0 — FULL RECODE</div>
 <h1>With Bad <span class="flicker">DEVELOPMENT</span></h1>
 <h3>Previously: With Bad STUDIOS</h3>
-<p class="lead">A small group that started as a fan club and grew into a team creating horror games on Roblox, Unity, and Godot. New name, new code, same people building things from the ground up.</p>
-<div class="ctas">
-<a class="btn" href="#games">See our games</a>
-<a class="btn ghost" href="#careers">Join the team</a>
-</div>
+<p class="lead">A small group that started as a fan club and grew into a team creating games on Roblox, Unity, and Godot.</p>
+<div class="ctas"><a class="btn" href="#games">See our games</a><a class="btn ghost" href="./help/">Need help?</a></div>
 </section>
-
 <section class="section" id="story">
 <div class="label">// changelog</div>
 <h2 class="heading">How we got here</h2>
-<p class="prose">Every version of With Bad Development has been a little different. Here's the build history.</p>
-
+<p class="prose">Every version changes something. This is where the current build came from.</p>
 <div style="margin-top:30px">
-
-<div class="log-line">
-<div class="log-ver">v0.1</div>
-<div class="log-tag">Origin</div>
-<div class="log-body">
-<h3>Monkey Fan Group Bloxburg</h3>
-<p>Founded by 12aaron1221 as a casual hangout spot. No real projects yet, just a group of people trading ideas for about a year.</p>
+<div class="log-line"><div class="log-ver">v0.1</div><div class="log-tag">Origin</div><div class="log-body"><h3>Monkey Fan Group Bloxburg</h3><p>Founded by 12aaron1221 as a casual hangout spot with no real projects yet.</p></div></div>
+<div class="log-line"><div class="log-ver">v1.0</div><div class="log-tag">Rebrand</div><div class="log-body"><h3>With Bad STUDIOS</h3><p>The group became a proper studio and started working on projects including DOORS With Bad and Poppy Playtime With Bad.</p></div></div>
+<div class="log-line"><div class="log-ver">v1.5</div><div class="log-tag">Breakout</div><div class="log-body"><h3>Scary Baboon With Bad</h3><p>The project brought more attention to the team and became one of its biggest projects.</p></div></div>
+<div class="log-line"><div class="log-ver">v2.0</div><div class="log-tag">Growth</div><div class="log-body"><h3>The team expands</h3><p>Developers, moderators, testers, composers, artists, and contributors joined the team.</p></div></div>
+<div class="log-line"><div class="log-ver">v4.0</div><div class="log-tag current">Current</div><div class="log-body"><h3>Full Recode</h3><p>The entire website has been recoded from the ground up with a new green terminal-style design, more animations, cleaner pages, and a dedicated help section.</p></div></div>
 </div>
-</div>
-
-<div class="log-line">
-<div class="log-ver">v1.0</div>
-<div class="log-tag">Rebrand</div>
-<div class="log-body">
-<h3>With Bad STUDIOS</h3>
-<p>With help from 12aaron1221's sister, the group rebranded into something that actually felt like a studio. The first real development roster formed and the team began shipping projects including DOORS With Bad and Poppy Playtime With Bad.</p>
-</div>
-</div>
-
-<div class="log-line">
-<div class="log-ver">v1.5</div>
-<div class="log-tag">Breakout</div>
-<div class="log-body">
-<h3>Scary Baboon With Bad</h3>
-<p>Inspired by the VR game Scary Baboon, this project put the studio on the map and showed what the team could build with an audience watching.</p>
-</div>
-</div>
-
-<div class="log-line">
-<div class="log-ver">v2.0</div>
-<div class="log-tag">Growth</div>
-<div class="log-body">
-<h3>The team expands</h3>
-<p>Leadership, developers, moderators, testers, composers, and artists joined in, turning a small passion project into a team working across multiple engines.</p>
-</div>
-</div>
-
-<div class="log-line">
-<div class="log-ver">v3.0</div>
-<div class="log-tag">Rebrand</div>
-<div class="log-body">
-<h3>With Bad DEVELOPMENT</h3>
-<p>The name changed from STUDIOS to DEVELOPMENT to better fit a team building across Roblox, Unity, and Godot.</p>
-</div>
-</div>
-
-<div class="log-line">
-<div class="log-ver">v4.0</div>
-<div class="log-tag current">Current</div>
-<div class="log-body">
-<h3>Full Recode</h3>
-<p>The website gets completely rebuilt from the ground up. New terminal interface, new animations, new Help Center, cleaner navigation, and a new green development-themed design.</p>
-</div>
-</div>
-
-</div>
-
 <div class="terminal">
-<div class="terminal__bar">
-<span class="terminal__dot active"></span>
-<span class="terminal__dot"></span>
-<span class="terminal__dot"></span>
-&nbsp;&nbsp;system.log
-</div>
+<div class="terminal__bar"><span class="terminal__dot"></span><span class="terminal__dot"></span><span class="terminal__dot"></span>&nbsp;&nbsp;system.log</div>
 <div class="terminal__body" id="bootlog"></div>
 </div>
 </section>
-
 <section class="section" id="team">
 <div class="label">// roster.json</div>
 <h2 class="heading">The Team</h2>
-<p class="prose">Builders, artists, moderators, testers, and everyone in between — the people actually making the games real.</p>
-
+<p class="prose">Builders, artists, moderators, testers, and everyone in between.</p>
 <div class="roster">
-
-<div class="role-card">
-<div class="role-card__icon">👑</div>
-<div class="role-card__title">Leadership</div>
-<div class="role-card__desc">Owner</div>
-<span class="name-chip">12aaron1221</span>
-</div>
-
-<div class="role-card">
-<div class="role-card__icon">💻</div>
-<div class="role-card__title">Developers</div>
-<div class="role-card__desc">Build the games, systems, and mechanics</div>
-<span class="name-chip">azteco1</span>
-<span class="name-chip">Timmen_3</span>
-<span class="name-chip">lceBurrgg</span>
-<span class="name-chip">Mr. Eye</span>
-<span class="name-chip">noobiestpro</span>
-<span class="name-chip">A-Bok</span>
-<span class="name-chip">Placeholder</span>
-<span class="name-chip">Krispy</span>
-</div>
-
-<div class="role-card">
-<div class="role-card__icon">🛡️</div>
-<div class="role-card__title">Moderators</div>
-<div class="role-card__desc">Keep the community safe and fair</div>
-<span class="name-chip">noobiestpro</span>
-<span class="name-chip">GHOSTT</span>
-<span class="name-chip">Rally</span>
-</div>
-
-<div class="role-card">
-<div class="role-card__icon">🧪</div>
-<div class="role-card__title">Testers</div>
-<div class="role-card__desc">Find bugs before players do</div>
-<span class="name-chip">noobiestpro</span>
-<span class="name-chip">Baller</span>
-<span class="name-chip">Rally</span>
-<span class="name-chip">Mr. Eye</span>
-<span class="name-chip">Axawatl242</span>
-</div>
-
-<div class="role-card">
-<div class="role-card__icon">🎵</div>
-<div class="role-card__title">Composers</div>
-<div class="role-card__desc">Music and sound for every game</div>
-<span class="name-chip">A-Bok</span>
-<span class="name-chip">noobiestpro</span>
-</div>
-
-<div class="role-card">
-<div class="role-card__icon">🎨</div>
-<div class="role-card__title">Artists</div>
-<div class="role-card__desc">Visuals, icons, UI, and style</div>
-<span class="name-chip">Baller</span>
-<span class="name-chip">Rally</span>
-<span class="name-chip">Ze</span>
-</div>
-
-<div class="role-card" style="grid-column:span 2">
-<div class="role-card__icon">💵</div>
-<div class="role-card__title">Contributors</div>
-<div class="role-card__desc">Wouldn't be possible without them</div>
-<span class="name-chip">Hypnotic</span>
-<span class="name-chip">Axawatl242</span>
-<span class="name-chip">Vildting</span>
-<span class="name-chip">Pandoro</span>
-<span class="name-chip">Cyan</span>
-<span class="name-chip">Weradof6</span>
-<span class="name-chip">A-Bok</span>
-<span class="name-chip">noobiestpro</span>
-<span class="name-chip">TCCRyan</span>
-<span class="name-chip">Dajared</span>
-<span class="name-chip">CattleTheCow</span>
-<span class="name-chip">Jayyy</span>
-<span class="name-chip">CrazyBen</span>
-<span class="name-chip">LSplash</span>
-<span class="name-chip">TIMEBOX</span>
-<span class="name-chip">Edgeware</span>
-<span class="name-chip">namegames</span>
-<span class="name-chip">YOU!!!</span>
-</div>
-
+<div class="role-card"><div class="role-card__icon">👑</div><div class="role-card__title">Leadership</div><div class="role-card__desc">Owner</div><span class="name-chip">12aaron1221</span></div>
+<div class="role-card"><div class="role-card__icon">💻</div><div class="role-card__title">Developers</div><div class="role-card__desc">Build games, systems, and mechanics.</div><span class="name-chip">azteco1</span><span class="name-chip">Timmen_3</span><span class="name-chip">lceBurrgg</span><span class="name-chip">Mr. Eye</span><span class="name-chip">noobiestpro</span><span class="name-chip">A-Bok</span><span class="name-chip">Placeholder</span><span class="name-chip">Krispy</span></div>
+<div class="role-card"><div class="role-card__icon">🛡️</div><div class="role-card__title">Moderators</div><div class="role-card__desc">Keep the community safe and fair.</div><span class="name-chip">noobiestpro</span><span class="name-chip">GHOSTT</span><span class="name-chip">Rally</span></div>
+<div class="role-card"><div class="role-card__icon">🧪</div><div class="role-card__title">Testers</div><div class="role-card__desc">Find bugs before players do.</div><span class="name-chip">noobiestpro</span><span class="name-chip">Baller</span><span class="name-chip">Rally</span><span class="name-chip">Mr. Eye</span><span class="name-chip">Axawatl242</span></div>
+<div class="role-card"><div class="role-card__icon">🎵</div><div class="role-card__title">Composers</div><div class="role-card__desc">Music and sound.</div><span class="name-chip">A-Bok</span><span class="name-chip">noobiestpro</span></div>
+<div class="role-card"><div class="role-card__icon">🎨</div><div class="role-card__title">Artists</div><div class="role-card__desc">Visuals, icons, UI, and style.</div><span class="name-chip">Baller</span><span class="name-chip">Rally</span><span class="name-chip">Ze</span></div>
+<div class="role-card" style="grid-column:span 2"><div class="role-card__icon">💵</div><div class="role-card__title">Contributors</div><div class="role-card__desc">Wouldn't be possible without them.</div><span class="name-chip">Hypnotic</span><span class="name-chip">Axawatl242</span><span class="name-chip">Vildting</span><span class="name-chip">Pandoro</span><span class="name-chip">Cyan</span><span class="name-chip">Weradof6</span><span class="name-chip">A-Bok</span><span class="name-chip">noobiestpro</span><span class="name-chip">TCCRyan</span><span class="name-chip">Dajared</span><span class="name-chip">CattleTheCow</span><span class="name-chip">Jayyy</span><span class="name-chip">CrazyBen</span><span class="name-chip">LSplash</span><span class="name-chip">TIMEBOX</span><span class="name-chip">Edgeware</span><span class="name-chip">namegames</span><span class="name-chip">YOU!!!</span></div>
 </div>
 </section>
-
 <section class="section" id="games">
 <div class="label">// games.list</div>
 <h2 class="heading">Roblox Games</h2>
-<p class="prose">Live projects and games currently being worked on.</p>
-
+<p class="prose">Current projects from With Bad DEVELOPMENT.</p>
 <div class="game-grid">
-
-<a class="game-card" href="https://www.roblox.com/games/12350512455/DOORS-With-Bad" target="_blank" rel="noopener">
-<div class="game-card__eyebrow">Most updated</div>
-<div class="game-card__title">DOORS With Bad</div>
-<p class="game-card__desc">The same place, in a new way. Lots of rooms, and some terror.</p>
-<div class="game-card__link">Play on Roblox <span class="arrow">→</span></div>
-</a>
-
-<a class="game-card" href="https://www.roblox.com/games/17784709180/Scary-Baboon-With-Bad" target="_blank" rel="noopener">
-<div class="game-card__eyebrow">Horror · Breakout hit</div>
-<div class="game-card__title">Scary Baboon With Bad</div>
-<p class="game-card__desc">Run from scary monsters. Unfinished and actively improving — expect bugs.</p>
-<div class="game-card__link">Play on Roblox <span class="arrow">→</span></div>
-</a>
-
-<a class="game-card" href="https://www.roblox.com/games/122554580445764/The-Foundation-With-Bad" target="_blank" rel="noopener">
-<div class="game-card__eyebrow">Horror</div>
-<div class="game-card__title">The Foundation With Bad</div>
-<p class="game-card__desc">Our latest horror project on Roblox.</p>
-<div class="game-card__link">Play on Roblox <span class="arrow">→</span></div>
-</a>
-
-<a class="game-card" href="https://www.roblox.com/games/10527073292/Poppy-Playtime-With-Bad" target="_blank" rel="noopener">
-<div class="game-card__eyebrow">Popular</div>
-<div class="game-card__title">Poppy Playtime With Bad</div>
-<p class="game-card__desc">One of our longest-running fan projects.</p>
-<div class="game-card__link">Play on Roblox <span class="arrow">→</span></div>
-</a>
-
+<a class="game-card" href="https://www.roblox.com/games/12350512455/DOORS-With-Bad" target="_blank"><div class="game-card__eyebrow">Most updated</div><div class="game-card__title">DOORS With Bad</div><p class="game-card__desc">The same place, in a new way. Lots of rooms, and some terror.</p><div class="game-card__link">Play on Roblox <span class="arrow">→</span></div></a>
+<a class="game-card" href="https://www.roblox.com/games/17784709180/Scary-Baboon-With-Bad" target="_blank"><div class="game-card__eyebrow">Horror · Breakout hit</div><div class="game-card__title">Scary Baboon With Bad</div><p class="game-card__desc">Run from scary monsters. Unfinished and actively improving.</p><div class="game-card__link">Play on Roblox <span class="arrow">→</span></div></a>
+<a class="game-card" href="https://www.roblox.com/games/122554580445764/The-Foundation-With-Bad" target="_blank"><div class="game-card__eyebrow">Horror</div><div class="game-card__title">The Foundation With Bad</div><p class="game-card__desc">Our latest horror project on Roblox.</p><div class="game-card__link">Play on Roblox <span class="arrow">→</span></div></a>
+<a class="game-card" href="https://www.roblox.com/games/10527073292/Poppy-Playtime-With-Bad" target="_blank"><div class="game-card__eyebrow">Popular</div><div class="game-card__title">Poppy Playtime With Bad</div><p class="game-card__desc">One of our longest-running fan projects.</p><div class="game-card__link">Play on Roblox <span class="arrow">→</span></div></a>
 </div>
-
-<p style="margin-top:25px;font-size:12px;color:var(--muted)">Also building on Unity — updates posted to our <a href="https://www.youtube.com/@WithBadDEVELOPMENT/" target="_blank" rel="noopener" style="color:var(--green)">YouTube channel</a>.</p>
 </section>
-
 <section class="section" id="careers">
 <div class="label">// open.roles</div>
 <h2 class="heading">Careers</h2>
-<p class="prose">We're not a corporate studio — we're a small team of developers, artists, testers, and moderators building games we actually want to play.</p>
-
-<div class="applications-panel">
-<h3>Applications Open</h3>
-<p>Want to join With Bad Development? Submit an application through our official application page.</p>
-<a class="btn" href="https://sites.google.com/view/with-bad-studios/applications" target="_blank" rel="noopener">View Applications</a>
-</div>
-
+<p class="prose">We're a small team of developers, artists, testers, and moderators building games we actually want to play.</p>
+<div class="applications-panel"><h3>Applications Open</h3><p>Want to join With Bad Development? Submit an application through our application page.</p><a class="btn" href="https://sites.google.com/view/with-bad-studios/applications" target="_blank">View Applications</a></div>
 <div class="career-grid">
-
-<div class="career-card">
-<div class="career-card__head">
-<div class="career-card__title">Developers</div>
-<div class="career-card__age">Age 13+</div>
+<div class="career-card"><div class="career-card__head"><div class="career-card__title">Developers</div><div class="career-card__age">Age 13+</div></div><p class="career-card__desc">Turn ideas into working systems and mechanics.</p><ul><li>Write code</li><li>Fix bugs</li><li>Improve performance</li></ul></div>
+<div class="career-card"><div class="career-card__head"><div class="career-card__title">Artists</div><div class="career-card__age">Age 11+</div></div><p class="career-card__desc">Shape how games look and feel.</p><ul><li>Design assets</li><li>Create environments</li><li>Work with developers</li></ul></div>
+<div class="career-card"><div class="career-card__head"><div class="career-card__title">Moderation</div><div class="career-card__age">Age 13+</div></div><p class="career-card__desc">Keep the community fair and fun.</p><ul><li>Watch the community</li><li>Handle problems</li><li>Help players</li></ul></div>
+<div class="career-card"><div class="career-card__head"><div class="career-card__title">Testers</div><div class="career-card__age">Any age*</div></div><p class="career-card__desc">Find problems before players do.</p><ul><li>Test builds</li><li>Find bugs</li><li>Give feedback</li></ul></div>
 </div>
-<p class="career-card__desc">Turn ideas into working systems — from movement to mechanics to the details players never notice until they break.</p>
-<ul>
-<li>Write code and build features</li>
-<li>Fix bugs and improve performance</li>
-<li>Work with artists and testers</li>
-</ul>
-</div>
-
-<div class="career-card">
-<div class="career-card__head">
-<div class="career-card__title">Artists</div>
-<div class="career-card__age">Age 11+</div>
-</div>
-<p class="career-card__desc">Shape how a game looks and feels — environments, UI, and the small details that bring everything to life.</p>
-<ul>
-<li>Design assets and visuals</li>
-<li>Create environments and styles</li>
-<li>Work with developers</li>
-</ul>
-</div>
-
-<div class="career-card">
-<div class="career-card__head">
-<div class="career-card__title">Moderation</div>
-<div class="career-card__age">Age 13+</div>
-</div>
-<p class="career-card__desc">Keep the community fair and fun instead of toxic — in the game and around it.</p>
-<ul>
-<li>Watch over the community</li>
-<li>Step in when things go wrong</li>
-<li>Help players when needed</li>
-</ul>
-</div>
-
-<div class="career-card">
-<div class="career-card__head">
-<div class="career-card__title">Testers</div>
-<div class="career-card__age">Any age*</div>
-</div>
-<p class="career-card__desc">Play early builds and find what's wrong before anyone else does.</p>
-<ul>
-<li>Play early versions</li>
-<li>Find bugs and glitches</li>
-<li>Give honest feedback</li>
-</ul>
-</div>
-
-</div>
-
-<div class="branches">
-<div class="branch-pill">Godot — flexible & lightweight</div>
-<div class="branch-pill">Roblox — fast-paced & social</div>
-<div class="branch-pill">Unity — large-scale projects</div>
-</div>
+<div class="branches"><div class="branch-pill">Godot — flexible & lightweight</div><div class="branch-pill">Roblox — fast-paced & social</div><div class="branch-pill">Unity — large-scale projects</div></div>
 </section>
-
-<section class="cta">
-<h2>Built by people, <span>not just code.</span></h2>
-<p>If that sounds like your kind of team, send in an application — we read every one.</p>
-<a class="btn" href="https://sites.google.com/view/with-bad-studios/applications" target="_blank" rel="noopener">Apply now</a>
-</section>
-
-<footer>
-<div>WITH BAD DEVELOPMENT <span>—</span> formerly With Bad STUDIOS</div>
-<div>Roblox <span>·</span> Unity <span>·</span> Godot <span>·</span> v4.0.0</div>
-</footer>
-
+<section class="cta"><h2>Built by people, not just code.</h2><p>If that sounds like your kind of team, send in an application.</p><a class="btn" href="https://sites.google.com/view/with-bad-studios/applications" target="_blank">Apply now</a></section>
+<footer><div>WITH BAD DEVELOPMENT — formerly With Bad STUDIOS</div><div>Roblox · Unity · Godot</div></footer>
 <script>
-const loaderText=document.getElementById("loaderText");
-const loader=document.getElementById("loader");
-
-const messages=[
-"> starting system...",
-"> loading studio_profile.cfg...",
-"> loading website modules...",
-"> connecting to team database...",
-"> loading games.list...",
-"> help system detected...",
-"> system ready."
-];
-
-let messageIndex=0;
-
-function nextLoaderMessage(){
-if(messageIndex<messages.length){
-loaderText.textContent=messages[messageIndex];
-messageIndex++;
-setTimeout(nextLoaderMessage,260);
-}
-}
-
-nextLoaderMessage();
-
-window.addEventListener("load",()=>{
-setTimeout(()=>{
-loader.classList.add("hidden");
-},1900);
-});
-
 const lines=document.querySelectorAll(".log-line");
-
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("visible");
-observer.unobserve(entry.target);
-}
-});
-},{threshold:.12});
-
-lines.forEach(line=>observer.observe(line));
-
-const bootLines=[
-"> loading studio_profile.cfg ...",
-"> engines detected: Roblox, Unity, Godot",
-"> team roster synced",
-"> applications portal connected",
-"> help system: ONLINE",
-"> status: ONLINE"
-];
-
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add("visible");io.unobserve(x.target)}}),{threshold:.15});
+lines.forEach(x=>io.observe(x));
+const boot=["$ loading studio_profile.cfg ...","$ engines detected: Roblox, Unity, Godot","$ team roster synced","$ website build: FULL RECODE","$ help system: ONLINE","$ status: ONLINE"];
 const bootEl=document.getElementById("bootlog");
-let bootIndex=0;
-
-function typeNextLine(){
-if(bootIndex>=bootLines.length)return;
-
-const div=document.createElement("div");
-div.className="line";
-div.textContent=bootLines[bootIndex];
-bootEl.appendChild(div);
-bootIndex++;
-
-setTimeout(typeNextLine,450);
-}
-
-const bootObserver=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-typeNextLine();
-bootObserver.disconnect();
-}
-});
-},{threshold:.3});
-
-bootObserver.observe(bootEl);
+let i=0;
+function next(){if(i>=boot.length){bootEl.insertAdjacentHTML("beforeend",'<span class="cursor"></span>');return}const d=document.createElement("div");d.className="line";d.textContent=boot[i++];bootEl.appendChild(d);setTimeout(next,500)}
+new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){next();x.target.parentElement.dataset.started="1";this.disconnect}}),{threshold:.3}).observe(bootEl);
 </script>
-
 </body>
 </html>

@@ -347,7 +347,21 @@ header{
     color:var(--void);
     box-shadow:0 0 18px rgba(66,255,114,.3);
 }
+.navlinks .application{
+    color:var(--green);
+    border:1px solid var(--green);
+    padding:6px 10px;
+}
 
+.navlinks .application:after{
+    display:none;
+}
+
+.navlinks .application:hover{
+    background:var(--green);
+    color:var(--void);
+    box-shadow:0 0 18px rgba(66,255,114,.3);
+}
 
 /* =========================================================
    HERO
@@ -1571,7 +1585,12 @@ footer{
             >
                 Help
             </a>
-
+             <a
+                class="application"
+                href="./applications/"
+            >
+                Applications
+            </a>
         </div>
 
     </div>
